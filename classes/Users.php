@@ -99,6 +99,15 @@ class Users
         $projects_obj->execute();
         return $projects_obj->get_result();
     }
+
+    public function get_user_all_projects()
+    {
+        $projects_query = "SELECT * FROM " . $this->projects_table . " WHERE user_id = ? ORDER BY id DESC";
+        $projects_obj = $this->conn->prepare($projects_query);
+        $projects_obj->bind_param("i", $this->user_id);
+        $projects_obj->execute();
+        return $projects_obj->get_result();
+    }
 }
 
 
